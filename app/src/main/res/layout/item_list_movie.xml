@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="movieViewModel" type="com.example.filmmaker.film.PresentFilmViewModel"/>
+    </data>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:onClick="@{movieViewModel::onFilmDialogClick}"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvMovieTitle"
+        style="@style/movie_title"
+        android:text="@{movieViewModel.title()}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvMovieDirectorFullName"
+        style="@style/movie_director"
+        android:text="@{movieViewModel.directorName()}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+</layout>

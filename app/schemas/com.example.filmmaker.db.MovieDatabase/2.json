@@ -1,0 +1,110 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b484e041958caead1fe5c48a270f1bd9",
+    "entities": [
+      {
+        "tableName": "table_film",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mid` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `directorId` INTEGER NOT NULL, `title` TEXT NOT NULL, FOREIGN KEY(`directorId`) REFERENCES `table_director`(`did`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "mid",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "directorsId",
+            "columnName": "directorId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "mid"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_table_film_directorId",
+            "unique": false,
+            "columnNames": [
+              "directorId"
+            ],
+            "createSql": "CREATE  INDEX `index_table_film_directorId` ON `${TABLE_NAME}` (`directorId`)"
+          },
+          {
+            "name": "index_table_film_title",
+            "unique": false,
+            "columnNames": [
+              "title"
+            ],
+            "createSql": "CREATE  INDEX `index_table_film_title` ON `${TABLE_NAME}` (`title`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "table_director",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "directorId"
+            ],
+            "referencedColumns": [
+              "did"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "table_director",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`did` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `full_name` TEXT NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "did",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fullname",
+            "columnName": "full_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "did"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_table_director_full_name",
+            "unique": true,
+            "columnNames": [
+              "full_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_table_director_full_name` ON `${TABLE_NAME}` (`full_name`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b484e041958caead1fe5c48a270f1bd9')"
+    ]
+  }
+}
